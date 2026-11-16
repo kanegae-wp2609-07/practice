@@ -67,11 +67,22 @@
     // 【出力例】
     // りんごは120円です
 
+    // let item　→　変数
+    // const item →　定数　値が変わらない
+    const item = {
+      name: 'りんご',
+      price: 120
+    }
+    console.log(`商品名:${item.name}、値段:${item.price}円です`)
+
 
     // 問2 プロパティの書き換えと追加
     // 問1の item の price を 150 に書き換え、在庫数を表すプロパティ stock を追加して 5 を代入してください。
     // 【出力例】
     // りんごは150円です（在庫5個）
+    item.price = 150;
+    item.stock = 5;
+    console.log(`${item.name}は${item.price}円です(在庫${item.stock}個)`);
 
 
     // 問3 要素の取得と文字の書き換え
@@ -80,6 +91,12 @@
     // 見出し（#shop-name）が「ふくおかマルシェ」になる
     // メッセージ（.message）が「いらっしゃいませ」になる
 
+    // 必要な要素を探す　→　どのプロパティか調べる　→　書き換える
+    const shopName = document.querySelector('#shop-name');
+    shopName.textContent = 'ふくおかマルシェ';
+    const message = document.querySelector('.message');
+    message.textContent = 'いらっしゃいませ';
+
 
     // 問4 classList
     // classList を使って、クラスを付け外ししてください。
@@ -87,11 +104,24 @@
     // #notice から is-hidden クラスを外し、「本日はポイント2倍です」が表示される
     // #sale に is-active クラスを付け、「セール中」が赤い背景で表示される
 
+    // document.querySelector('セレクタ');　最初はとにかく探す
+    // querySelectorはセレクタ指定なので「#」や「.」いる
+    // classListはセレクタじゃなくクラス指定なので「.」いらない
+    const notice = document.querySelector('#notice');
+    notice.classList.remove('is-hidden');
+    const sale = document.querySelector('#sale');
+    sale.classList.add('is-active');
+
 
     // 問5 createElement() による要素の追加
     // createElement() で li 要素を作り、append() で #item-list の最後に追加してください。
     // 【完成イメージ】
     // リストが「りんご」「バナナ」「みかん」の3つになる
+    const itemList = document.querySelector('#item-list');
+    const li = document.createElement('li');
+    li.textContent = 'みかん';
+    // console.log(li);
+    itemList.append(li);
 
 
     // 問6 innerHTML による要素の追加
@@ -102,11 +132,20 @@
     // <h3>新着商品</h3>
     // <p>いちごが入荷しました</p>
 
+    // newArrival.textContentを使うと<h3>などのタグも表示される
+    const newArrival = document.querySelector('#new-arrival');
+    newArrival.innerHTML = `
+     <h3 class="section-title">新着商品</h3>
+     <p>${newItemName}が入荷しました</p>
+    `;
+
 
     // 問7 要素の削除
     // remove() を使って、#old-info の要素を削除してください。
     // 【完成イメージ】
     // 「このお知らせは終了しました」が表示されなくなる
+    const oldInfo = document.querySelector('#old-info');
+    oldInfo.remove();
 
 
     // 問8 まとめ
@@ -120,7 +159,36 @@
     // 【完成イメージ】
     // カードの商品名が「メロン」、値段が「800円」になる
     // 売り切れのため、カードが薄く表示される
+    const card = document.querySelector('#card');
+    const cardName = document.querySelector('.card-name');
+    const cardPrice = document.querySelector('.card-price');
+    cardName.textContent=melon.name;
+    cardPrice.textContent=melon.price;
+    card.classList.add('is-sold-out');
 
+
+    // 発展問題
+    // １．melonと同じ構造のオブジェクトを４つ作り、それぞれ商品名を「にんじん」「じゃがいも」「きゅうり」「キャベツ」にしてください。値段と在庫数は好きな値を設定してください。
+    const carrot = {
+      name: "にんじん",
+      price: 100,
+      stock: 10,
+    };
+    const potato = {
+      name: "じゃがいも",
+      price: 80,
+      stock: 20,
+    };
+    const cucumber = {
+      name: "きゅうり",
+      price: 50,
+      stock: 15,
+    };
+    const cabbage = {
+      name: "キャベツ",
+      price: 200,
+      stock: 15,
+    };
   </script>
 </body>
 
