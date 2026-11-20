@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI計算</title>
+  <style>
+    .bmi-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>BMI計算</h1>
+  <p>体重（kg）と身長（cm）を入力してください。</p>
+  <p>
+    <label for="weight">体重: </label><input type="number" name="weight" id="weight">kg
+  </p>
+  <p>
+    <label for="height">身長: </label><input type="number" name="height" id="height">kg
+  </p>
+  <p>
+    <button id="calc" type="button">BMIを計算する</button>
+  </p>
+
+  <div id="result">
+    <!-- 
+    【表示例】
+    <p>あなたのBMIは<span class="bmi-value">21.24</span>です。</p> 
+    -->
+  </div>
+</body>
+
+</html>

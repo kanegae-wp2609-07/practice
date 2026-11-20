@@ -33,15 +33,44 @@
     // メニューは全部で5品です
     // 1番目は肉汁あふれる焼き餃子です
     const menus = [
-      { name: '肉汁あふれる焼き餃子', shop: '博多ぎょうざ堂', category: '餃子', pieces: 6, price: 580, allergens: '小麦' },
-
-      { name: 'ぷりぷり海老蒸し餃子', shop: '中華食堂 蒸々屋', category: '餃子', pieces: 4, price: 580, allergens: ['えび', '小麦'] },
-
-      { name: '手包み肉まん', shop: '中華食堂 蒸々屋', category: 'サイド', pieces: null, price: 350, allergens: '小麦' },
-
-      { name: 'レモンチーズのデザート餃子', shop: 'Mediterraneo Gyoza', category: 'スイーツ', pieces: 3, price: 480, allergens: ['小麦', '乳'] },
-
-      { name: '八女茶ソーダ', shop: '博多ぎょうざ堂', category: 'ドリンク', pieces: null, price: 350, allergens: '' }
+      {
+        name: '肉汁あふれる焼き餃子',
+        shop: '博多ぎょうざ堂',
+        category: '餃子',
+        pieces: 6,
+        price: 580,
+        allergens: ['小麦']
+      },
+      {
+        name: 'ぷりぷり海老蒸し餃子',
+        shop: '中華食堂 蒸々屋',
+        category: '餃子',
+        pieces: 4,
+        price: 580,
+        allergens: ['えび', '小麦']
+      },
+      {
+        name: '手包み肉まん', shop: '中華食堂 蒸々屋', category: 'サイド',
+        pieces: null,
+        price: 350,
+        allergens: ['小麦']
+      },
+      {
+        name: 'レモンチーズのデザート餃子',
+        shop: 'Mediterraneo Gyoza',
+        category: 'スイーツ',
+        pieces: 3,
+        price: 480,
+        allergens: ['小麦', '乳']
+      },
+      {
+        name: '八女茶ソーダ',
+        shop: '博多ぎょうざ堂',
+        category: 'ドリンク',
+        pieces: null,
+        price: 350,
+        allergens: []
+      }
     ];
     console.log(`メニューは全部で${menus.length}品です`);
     console.log(`1番目は${menus[0].name}です`);
@@ -64,13 +93,21 @@
     // 手包み肉まん：350円
     // レモンチーズのデザート餃子（3個入り）：480円
     // 八女茶ソーダ：350円
-menus.forEach((menu) => {
-  if(){
-  console.log(`${menu.name}`);
-  }else{
-    
-  }
-});
+    menus.forEach((menu) => {
+      if (menu.pieces !== null) {
+        console.log(`${menu.name}（${menu.pieces}個入り）：${menu.price}円`);
+      } else {
+        console.log(`${menu.name}：${menu.price}円`);
+      }
+    });
+    /*
+    menus.forEach((menu) => {
+      if (menu.pieces === null) {
+        console.log(`${menu.name}：${menu.price}円`);
+      } else {
+        console.log(`${menu.name}（${menu.pieces}個入り）：${menu.price}円`);
+      }
+    });*/
 
     // 問4 配列を1つの文字列にする（join()）
     // forEach() で商品名とアレルゲンを出力してください。
@@ -82,6 +119,26 @@ menus.forEach((menu) => {
     // 手包み肉まん：小麦
     // レモンチーズのデザート餃子：小麦・乳
     // 八女茶ソーダ：アレルゲンなし
+    menus.forEach((menu) => {
+      if (menu.allergens.length === 0) {
+        console.log(`${menu.name}：アレルゲンなし`);
+      }
+      else {
+        console.log(`${menu.name}：${menu.allergens.join('・')}`);
+      }
+    });
+    /*
+     menus.forEach((menu) => {
+       if (menu.allergens.length > 1) {
+         console.log(`${menu.name}：${menu.allergens.join('・')}`);
+       }
+       if (menu.allergens.length = 1) {
+         console.log(`${menu.name}：${menu.allergens}`);
+       }
+       else {
+         console.log(`${menu.name}：アレルゲンなし`);
+       }
+     });*/
 
 
     // 問5 配列に含まれているか調べる（includes()）
@@ -90,7 +147,15 @@ menus.forEach((menu) => {
     // 【出力例】
     // ぷりぷり海老蒸し餃子
     // えびを含む商品は1品です
-
+    let shrimpCount = 0;
+    menus.forEach((menu) => {
+      // console.log(menu.name,menu.allergens.includes('えび'));
+      if (menu.allergens.includes('えび')) {
+        console.log(menu.name);
+        shrimpCount++;
+      }
+    });
+    console.log(`えびを含む商品は${shrimpCount}品です`)
 
     // 問6 配列に含まれていないものを探す
     // 「乳」を含まない商品の名前を出力してください。
@@ -99,7 +164,11 @@ menus.forEach((menu) => {
     // ぷりぷり海老蒸し餃子
     // 手包み肉まん
     // 八女茶ソーダ
-
+    menus.forEach((menu) => {
+      if (!menu.allergens.includes('乳')) {
+        console.log(menu.name);
+      }
+    });
 
     // 問7 店名で絞り込んで合計する
     // 「博多ぎょうざ堂」の商品の名前と価格を出力し、最後に合計金額を出力してください。
@@ -108,6 +177,22 @@ menus.forEach((menu) => {
     // 八女茶ソーダ：350円
     // 博多ぎょうざ堂の合計は930円です
 
+    //合計など数字に関するものが出てくるときは計算するための 変数 0 を作る
+    let shopTotal = 0;
+    menus.forEach((menu) => {
+      if (menu.shop === '博多ぎょうざ堂') {
+        console.log(`${menu.name}：${menu.price}円`);
+        shopTotal += menu.price;
+      }
+    });
+    /*
+    menus.forEach((menu) => {
+      if (menu.shop.includes('博多ぎょうざ堂')) {
+        console.log(`${menu.name}：${menu.price}円`);
+        shopTotal += menu.price;
+      }
+    });*/
+    console.log(`博多ぎょうざ堂の合計は${shopTotal}円です`);
 
     // 問8 メニューを一覧表示する
     // menus を、次の形で #menu-list に一覧表示してください。
@@ -120,6 +205,27 @@ menus.forEach((menu) => {
     // 手包み肉まん 350円／アレルゲン：小麦
     // レモンチーズのデザート餃子（3個入り） 480円／アレルゲン：小麦・乳
     // 八女茶ソーダ 350円／アレルゲン：なし
+    const menuList = document.querySelector('#menu-list');
+    let html = 0;
+    menus.forEach((menu) => {
+      let piecesText = '';
+      let allergensText = 'なし';
+
+      // piecesTexを作る
+      if (menu.pieces !== null) {
+        piecesText = `(${menu.pieces}個入り）`;
+      }
+
+      // allergensTextを作る
+      if (menu.allergens.length > 0) {
+        allergensText = `${menu.allergens.join('・')}`;
+      }
+
+      // li要素一個分のHTML文字列を作って書き足し
+      html += `<li>${menu.name}${piecesText}${menu.price}円／アレルゲン：${allergensText}</li>`;
+    });
+
+    menuList.innerHTML = html;
 
 
     // 問9 まとめ
@@ -131,6 +237,40 @@ menus.forEach((menu) => {
     // 【完成イメージ】
     // 「乳」を選んで押すと「肉汁あふれる焼き餃子」「ぷりぷり海老蒸し餃子」「手包み肉まん」「八女茶ソーダ」が表示される
     // 「小麦」を選んで押すと「八女茶ソーダ」だけが表示される
+
+    // 1.セレクトボックス
+    const allergenSelect = document.querySelector('#allergen-select');
+    allergenList.forEach((item) => {
+      // console.log(item);
+      // option要素を作る
+      const optionElm = document.createElement('option');
+      // option要素のテキストを入れる
+      optionElm.textContent = item;
+      // option要素のvalyue属性を設定する
+      // optionElm.value = item;
+      // allergenSelectにappend()する
+      allergenSelect.append(optionElm);
+    });
+
+    // 2.フィルタリング
+    const filterButton = document.querySelector('#filter-button');
+    const safeList = document.querySelector('#safe-list');
+    filterButton.addEventListener('click', () => {
+      // どの選択肢が選ばれているか取得
+      const selected = allergenSelect.value;
+      console.log(selected);
+
+      // 選択されているアレルゲンを含まないメニューのみ取り出す
+      let safeHtml = '';
+      menus.forEach((menu) => {
+        if (!menu.allergens.includes(selected)) {
+          // console.log(menu.name);
+          safeHtml += `<li>${menu.name}</li>`
+        }
+      });
+      // HTMLを作る
+      safeList.innerHTML = safeHtml;
+    });
 
   </script>
 </body>
